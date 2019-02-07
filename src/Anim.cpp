@@ -94,7 +94,7 @@ void C35::Surface::Overlay( SDL_Surface* dst, int x,int y) const
 {
 	if( surface && dst )
 	{
-		SDL_Rect dr = { x-hx, y-hy, surface->w, surface->h };
+		SDL_Rect dr = { (short)(x-hx), (short)(y-hy), (unsigned short)(surface->w), (unsigned short)(surface->h) };
 		SDL_BlitSurface( surface, 0, dst, &dr );
 	}
 }
@@ -103,7 +103,7 @@ void C35::Surface::Overlay( Surface& dst, int x,int y ) const
 {
 	if( surface && dst.surface )
 	{
-		SDL_Rect dr = { x-hx, y-hy, surface->w, surface->h };
+		SDL_Rect dr = { (short)(x-hx), (short)(y-hy), (unsigned short)(surface->w), (unsigned short)(surface->h) };
 		SDL_BlitSurface( surface, 0, dst.surface, &dr );
 	}
 
@@ -174,7 +174,7 @@ C35::AnimReflection C35::CIS::Refl(UC hue)
 
 string ExtractFileExt(std::string fn)
 {
-	int p = fn.find_last_of('.');
+	auto p = fn.find_last_of('.');
 	if(p==string::npos) return "";
 	string ret = fn.substr(p+1);
 	for( char& c : ret ) c=tolower(c);
@@ -183,7 +183,7 @@ string ExtractFileExt(std::string fn)
 
 string ExtractFileBase(std::string fn)
 {
-	int p = fn.find_last_of('.');
+	auto p = fn.find_last_of('.');
 	if(p==string::npos) return fn;
 	string ret = fn.substr(0,p);
 	//for( char& c : ret ) c=tolower(c);
@@ -265,6 +265,7 @@ void C35::CIS::LoadInternal( istream& is )
 			case alpha:   has_dither = true; break;
 			case trans:   has_trans  = true; break;
 			case colimp:  has_colimp = true; break;
+			default: break;
 		}
 
 	}
@@ -304,7 +305,7 @@ void C35::CIS::LoadInternal( istream& is )
 		}
 	};
 
-	auto GetC_8 = [&odd,&cc](std::istream& is) -> UC
+	auto GetC_8 = [&cc](std::istream& is) -> UC
 	{
 		ReadBinary(is,cc);
 		return cc;
@@ -340,7 +341,7 @@ void C35::CIS::LoadInternal( istream& is )
 
 void C35::CIS::SaveInternal( ostream& os )
 {
-	int i,sz = w*h;
+	unsigned int i,sz = w*h;
 
 	assert(sz<=pixeltypes.size());
 	unsigned char c=0;
@@ -380,11 +381,11 @@ void C35::CIS::SaveInternal( ostream& os )
 	{
 		if(odd) WriteBinary(os,cc);
 	};
-	auto PutC_8 = [&odd,&cc](std::ostream& os,UC uc) -> void
+	auto PutC_8 = [&cc](std::ostream& os,UC) -> void
 	{
 		WriteBinary(os,cc);
 	};
-	auto PutC_6 = [&odd,&cc](std::ostream& os,UC uc) -> void
+	auto PutC_6 = [&](std::ostream& ,UC ) -> void
 	{
 		// later
 	};
@@ -622,7 +623,7 @@ namespace
 
 	bool HasMajority(const Pixels& pa, Pix& mean)
 	{
-		int count[4] = {0,0,0,0};
+		unsigned int count[4] = {0,0,0,0};
 
 		for(const Pix& p : pa)
 		{
@@ -875,7 +876,7 @@ void C35::CIS::Scale50w()
 
 	int x,y;
 
-	auto mkpix = [&x,&y,&small]( PixelType pt, const vector<HSVA>& pix ) -> void
+	auto mkpix = [&]( PixelType pt, const vector<HSVA>& pix ) -> void
 	{
 		if(pt==alpha)  small.has_dither =true;
 		if(pt==trans)  small.has_trans  =true;
@@ -889,7 +890,7 @@ void C35::CIS::Scale50w()
 			v += hsv.v;
 		}
 		int nn = pix.size();
-		HSVA newpix = { h/nn, s/nn, v/nn, 0 };
+		HSVA newpix = { UC(h/nn), UC(s/nn), UC(v/nn), 0 };
 		small.pixeltypes.push_back(pt);
 		small.pixels.push_back(newpix);
 	};
@@ -914,10 +915,10 @@ void C35::CIS::Scale50w()
 
 		for( int n = 2; n>0; --n )
 		{
-			if( nrm.size() == n ) { mkpix( normal, nrm ); break; }
-			if( trn.size() == n ) { mkpix( trans,  trn ); break; }
-			if( cli.size() == n ) { mkpix( colimp, cli ); break; }
-			if( dth.size() == n ) { mkpix( alpha,  dth ); break; }
+			if( (int)nrm.size() == n ) { mkpix( normal, nrm ); break; }
+			if( (int)trn.size() == n ) { mkpix( trans,  trn ); break; }
+			if( (int)cli.size() == n ) { mkpix( colimp, cli ); break; }
+			if( (int)dth.size() == n ) { mkpix( alpha,  dth ); break; }
 		}
 	}
 
@@ -946,7 +947,7 @@ void C35::CIS::Scale50h()
 
 	int x,y;
 
-	auto mkpix = [&x,&y,&small]( PixelType pt, const vector<HSVA>& pix ) -> void
+	auto mkpix = [&]( PixelType pt, const vector<HSVA>& pix ) -> void
 	{
 		if(pt==alpha)  small.has_dither =true;
 		if(pt==trans)  small.has_trans  =true;
@@ -960,7 +961,7 @@ void C35::CIS::Scale50h()
 			v += hsv.v;
 		}
 		int nn = pix.size();
-		HSVA newpix = { h/nn, s/nn, v/nn, 0 };
+		HSVA newpix = { UC(h/nn), UC(s/nn), UC(v/nn), 0 };
 		small.pixeltypes.push_back(pt);
 		small.pixels.push_back(newpix);
 	};
@@ -985,10 +986,10 @@ void C35::CIS::Scale50h()
 
 		for( int n = 2; n>0; --n )
 		{
-			if( nrm.size() == n ) { mkpix( normal, nrm ); break; }
-			if( trn.size() == n ) { mkpix( trans,  trn ); break; }
-			if( cli.size() == n ) { mkpix( colimp, cli ); break; }
-			if( dth.size() == n ) { mkpix( alpha,  dth ); break; }
+			if( (int)nrm.size() == n ) { mkpix( normal, nrm ); break; }
+			if( (int)trn.size() == n ) { mkpix( trans,  trn ); break; }
+			if( (int)cli.size() == n ) { mkpix( colimp, cli ); break; }
+			if( (int)dth.size() == n ) { mkpix( alpha,  dth ); break; }
 		}
 	}
 
@@ -1017,7 +1018,7 @@ C35::CIS C35::CIS::HalfSize()
 
 	int x,y;
 
-	auto mkpix = [&x,&y,&small]( PixelType pt, const vector<HSVA>& pix ) -> void
+	auto mkpix = [&]( PixelType pt, const vector<HSVA>& pix ) -> void
 	{
 		if(pt==alpha)  small.has_dither =true;
 		if(pt==trans)  small.has_trans  =true;
@@ -1031,7 +1032,7 @@ C35::CIS C35::CIS::HalfSize()
 			v += hsv.v;
 		}
 		int nn = pix.size();
-		HSVA newpix = { h/nn, s/nn, v/nn, 0 };
+		HSVA newpix = { UC(h/nn), UC(s/nn), UC(v/nn), 0 };
 		small.pixeltypes.push_back(pt);
 		small.pixels.push_back(newpix);
 	};
@@ -1056,10 +1057,10 @@ C35::CIS C35::CIS::HalfSize()
 
 		for( int n = 4; n>0; --n )
 		{
-			if( nrm.size() == n ) { mkpix( normal, nrm ); break; }
-			if( trn.size() == n ) { mkpix( trans,  trn ); break; }
-			if( cli.size() == n ) { mkpix( colimp, cli ); break; }
-			if( dth.size() == n ) { mkpix( alpha,  dth ); break; }
+			if( (int)nrm.size() == n ) { mkpix( normal, nrm ); break; }
+			if( (int)trn.size() == n ) { mkpix( trans,  trn ); break; }
+			if( (int)cli.size() == n ) { mkpix( colimp, cli ); break; }
+			if( (int)dth.size() == n ) { mkpix( alpha,  dth ); break; }
 		}
 	}
 
@@ -1828,9 +1829,9 @@ void C35::AnimDir::Mirror()
 
 string ExtractFileNameOnly(string fn)
 {
-	int p1 = fn.find_last_of("/\\");
+	auto p1 = fn.find_last_of("/\\");
 	if(p1==string::npos) p1=0;
-	int p2 = fn.find_last_of(".");
+	auto p2 = fn.find_last_of(".");
 	if( p2<p1 ) p2 = string::npos;
 	if(p2==string::npos)
 		return fn.substr(p1+1);

@@ -153,7 +153,7 @@ bool inside(SDL_Rect r)
 	return true;
 }
 
-bool Button(int x,int y,char* txt)
+bool Button(int x,int y,const char* txt)
 {
 	static Uint32 grey  = SDL_MapRGB( screen->format, 127,127,127 );
 	static Uint32 white = SDL_MapRGB( screen->format, 255,255,255 );

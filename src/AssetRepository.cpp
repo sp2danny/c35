@@ -38,9 +38,9 @@ C35::Asset<T>::operator T& ()
 void Dummy()
 {
 	using namespace C35;
-	CIS& cis = Asset<CIS>  ( "TemplateInstanciate1" );
-	AC&  ac  = Asset<AC >  ( "TemplateInstanciate2" );
-	AD&  ad  = Asset<AD >  ( "TemplateInstanciate3" );
-	BA&  ba  = Asset<BA >  ( "TemplateInstanciate4" );
+	[[maybe_unused]] CIS& cis = Asset<CIS>  ( "TemplateInstanciate1" );
+	[[maybe_unused]] AC&  ac  = Asset<AC >  ( "TemplateInstanciate2" );
+	[[maybe_unused]] AD&  ad  = Asset<AD >  ( "TemplateInstanciate3" );
+	[[maybe_unused]] BA&  ba  = Asset<BA >  ( "TemplateInstanciate4" );
 }
 

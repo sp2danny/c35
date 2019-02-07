@@ -28,11 +28,11 @@ namespace C35
 		int id;
 		Tile tile;
 		Mask mask;
-		char flavor;
+		unsigned char flavor;
 		int x,y;
 		int px,py;
-		char resource;
-		char goody;
+		unsigned char resource;
+		unsigned char goody;
 		City* city;
 		Player* owner;
 		char obscure;

@@ -58,6 +58,7 @@ void C35::City::Tick()
 			case land: xp_bonus += it.landXpBonus ; break;
 			case air:  xp_bonus += it.airXpBonus  ; break;
 			case sea:  xp_bonus += it.seaXpBonus  ; break;
+			default: break;
 		}
 		if( it.enableCity )  grow_max = 12;
 		if( it.enableMetro ) grow_max = 99;
@@ -459,7 +460,7 @@ C35::IdList C35::ImprovementType::ByName(string name)
 	while(true)
 	{
 		if(name.empty()) break; 
-		int p = name.find(',');
+		auto p = name.find(',');
 		int id = ToId( name.substr(0,p) );
 		if(id)
 			vi.push_back(id);
@@ -472,7 +473,7 @@ C35::IdList C35::ImprovementType::ByName(string name)
 C35::ImprovementType& C35::ImprovementType::Lookup(int id)
 {
 	assert(id>=1);
-	assert(id<=list.size());
+	assert(id<=(int)list.size());
 
 	return list[id-1];
 }

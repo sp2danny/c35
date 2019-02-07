@@ -5,15 +5,64 @@
   <VirtualDirectory Name="src">
     <File Name="src/Main.cpp"/>
     <File Name="src/FrameSystem.cpp"/>
+    <File Name="src/AI.cpp"/>
+    <File Name="src/Anim.cpp"/>
+    <File Name="src/AssetRepository.cpp"/>
+    <File Name="src/Board.cpp"/>
+    <File Name="src/City.cpp"/>
+    <File Name="src/CityView.cpp"/>
+    <File Name="src/Font.cpp"/>
+    <File Name="src/GUI.cpp"/>
+    <File Name="src/GameEngine.cpp"/>
+    <File Name="src/Hexagon.cpp"/>
+    <File Name="src/LoadScreen.cpp"/>
+    <File Name="src/LockedAnimation.cpp"/>
+    <File Name="src/MakeFrame.cpp"/>
+    <File Name="src/Menu.cpp"/>
+    <File Name="src/MiniMap.cpp"/>
+    <File Name="src/Player.cpp"/>
+    <File Name="src/Resource.cpp"/>
+    <File Name="src/TSD.cpp"/>
+    <File Name="src/Tech.cpp"/>
+    <File Name="src/Unit.cpp"/>
+    <File Name="src/UnitAction.cpp"/>
+    <File Name="src/pcxLoad.cpp"/>
+    <File Name="src/resize++.cpp"/>
+    <File Name="src/sdlGuiColl.cpp"/>
+    <File Name="src/stdafx.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="inc">
     <File Name="inc/FrameForwards.h"/>
     <File Name="inc/FrameSystem.h"/>
     <File Name="inc/Common.h"/>
+    <File Name="inc/AI.h"/>
+    <File Name="inc/Anim.h"/>
+    <File Name="inc/AssetRepository.h"/>
+    <File Name="inc/Board.h"/>
+    <File Name="inc/Capabilities.h"/>
+    <File Name="inc/City.h"/>
+    <File Name="inc/CityView.h"/>
+    <File Name="inc/Font.h"/>
+    <File Name="inc/GUI.h"/>
+    <File Name="inc/GameEngine.h"/>
+    <File Name="inc/Hexagon.h"/>
+    <File Name="inc/LockedAnimation.h"/>
+    <File Name="inc/MakeFrame.h"/>
+    <File Name="inc/Menu.h"/>
+    <File Name="inc/MiniMap.h"/>
+    <File Name="inc/Orders.h"/>
+    <File Name="inc/Player.h"/>
+    <File Name="inc/Resource.h"/>
+    <File Name="inc/Tech.h"/>
+    <File Name="inc/Unit.h"/>
+    <File Name="inc/UnitAction.h"/>
+    <File Name="inc/resize++.h"/>
+    <File Name="inc/sdlGuiColl.h"/>
+    <File Name="inc/stdafx.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
-      <Compiler Options="-Wall -Wextra -Werror -pedantic -std=c++17 -Wno-gnu-anonymous-struct -Wno-nested-anon-types" C_Options="-Wall" Assembler="">
+      <Compiler Options="-Wall -Wextra -Werror -pedantic -std=c++17 -Wno-gnu-anonymous-struct -Wno-nested-anon-types -Wno-c++11-narrowing -Wno-unused-function -Wno-unused-variable -Wno-missing-field-initializers -Wno-unused-parameter" C_Options="-Wall" Assembler="">
         <IncludePath Value="."/>
         <IncludePath Value="src"/>
         <IncludePath Value="inc"/>

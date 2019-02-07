@@ -40,7 +40,7 @@ namespace
 
 	SDL_Surface* surface = 0;
 
-	TTF_Font* sf;
+	//TTF_Font* sf;
 
 	struct SubLine
 	{
@@ -64,12 +64,13 @@ namespace
 	};
 
 	void PrintText( SDL_Surface* target, string text, int x, int y, bool center = false )
+	//void PrintText( SDL_Surface* target, string text, int x, int y, bool center = false )
 	{
-		SDL_Color col = { 0,0,0 };
+		/*SDL_Color col = { 0,0,0 };
 		SDL_Surface* tt = TTF_RenderText_Solid(sf, text.c_str(), col );
 		SDL_Rect tr = { x, y, tt->w, tt->h };
 		if(center) tr.x -= tt->w/2;
-		SDL_BlitSurface( tt, 0, target, &tr );
+		SDL_BlitSurface( tt, 0, target, &tr );*/
 	}
 
 	int form(int x)
@@ -136,6 +137,7 @@ namespace
 			case Line::sl_d:
 				pulldown.Get(menu_hue).Overlay(target,form(315),y);
 				break;
+			default: break;
 		}
 	}
 
@@ -265,11 +267,13 @@ void C35::Menu::InitMenu(Font& f)
 	Wake      = actions.Refl("Wake",      0, menu_hue);
 	WakeHL    = actions.Refl("WakeHL",    0, menu_hue);
 
+/*
 #ifdef _DEBUG
 	sf=TTF_OpenFont("gfx/arial.ttf",16);
 #else
 	sf=TTF_OpenFont("gfx/arial.ttf",24);
 #endif
+*/
 
 }
 

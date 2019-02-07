@@ -49,7 +49,7 @@ namespace
 	C35::LockedAnimation* locked=0;
 }
 
-void C35::GameEngine::LoadGame(char*)
+void C35::GameEngine::LoadGame(const char*)
 {
 }
 
@@ -102,12 +102,12 @@ void C35::GameEngine::Setup(bool fromstart)
 	int hue = rand()%256;
 	int hs = 256 / n;
 
-	Player* human = board.AddHumanControlled(hue);
+	[[maybe_unused]] Player* human = board.AddHumanControlled(hue);
 
 	for(i=1;i<n;++i)
 	{
 		hue = (hue+hs)%256;
-		Player* ai = board.AddComputerControlled(hue);
+		[[maybe_unused]] Player* ai = board.AddComputerControlled(hue);
 		//Player* ai = board.AddHumanControlled(hue);
 	}
 
@@ -168,7 +168,7 @@ void C35::GameEngine::Setup(bool fromstart)
 	PrepareTurn();
 }
 
-void C35::GameEngine::LoadMap(char* mapname)
+void C35::GameEngine::LoadMap(const char* mapname)
 {
 
 	ifstream ifs(mapname,ios_base::in | ios_base::binary );
@@ -193,7 +193,7 @@ void C35::GameEngine::RandomMap()
 {
 }
 
-void C35::GameEngine::SaveGame(char*)
+void C35::GameEngine::SaveGame(const char*)
 {
 }
 
@@ -289,7 +289,7 @@ void C35::GameEngine::AddStackOrder( vector<Unit*> uv , Orders o )
 void C35::GameEngine::TurnDone()
 {
 	ap++;
-	if( ap >= board.players.size() )
+	if( ap >= (int)board.players.size() )
 	{
 		// barbs ai here
 

@@ -17,14 +17,14 @@
 C35::PlayerHex& C35::PlayerBoard::Get(Pos p)
 {
 	assert( (p.x>=0) && (p.y>=0) && (p.x<width) && (p.y<height) );
-	int idx = p.x + p.y*width;
-	assert( (idx>=0) && (idx<map.size()) );
+	auto idx = p.x + p.y*width;
+	assert( (idx>=0) && (idx<(int)map.size()) );
 	return map[idx];
 }
 
 C35::PlayerHex& C35::PlayerBoard::Get(int idx)
 {
-	assert( (idx>=1) && (idx<=map.size()) );
+	assert( (idx>=1) && (idx<=(int)map.size()) );
 	return map[idx-1];
 
 	for(ever)
@@ -175,9 +175,13 @@ void C35::PlayerBoard::add_n( C35::PlayerHex& h, Dir6 d, int x,int y, bool wrap 
 	h.neighbours[d] = 0;
 	if( y<0 || y>= height ) return;
 	if( x<0 )
+	{
 		if(wrap) x+=width; else return;
+	}
 	if( x>= width )
+	{
 		if(wrap) x-=width; else return;
+	}
 	h.neighbours[d] = &Get(Pos(x,y));
 }
 
@@ -243,15 +247,19 @@ void C35::Board::add_n( C35::Hexagon& h, Dir6 d, int x,int y, bool wrap )
 	h.neighbours[d] = 0;
 	if( y<0 || y>= height ) return;
 	if( x<0 )
+	{
 		if(wrap)
 			x+=width;
 		else
 			return;
+	}
 	if( x>= width )
+	{
 		if(wrap)
 			x-=width;
 		else
 			return;
+	}
 	h.neighbours[d] = &Get(x,y);
 }
 
@@ -287,7 +295,7 @@ void C35::Board::do_neighbours(bool wrap)
 			h.x=x; h.y=y;
 			//	enum Dir6 { d6_beg=0, d6_upright=d6_beg, d6_right, d6_downright, d6_downleft, d6_left, d6_upleft, d6_end };
 			// bredd 110
-			// höjd  125
+			// hÃ¶jd  125
 			if( y%2 )
 			{
 				// odd
@@ -335,7 +343,7 @@ C35::Hexagon& C35::Board::Get(Pos p)
 C35::Hexagon& C35::Board::Get(int id)
 {
 	assert( id > 0 );
-	assert( id <= map.size() );
+	assert( id <= (int)map.size() );
 	return map[id-1];
 }
 
@@ -437,7 +445,7 @@ void C35::Board::ToStream(ostream& o) const
 	WriteBinary(o,width);
 	WriteBinary(o,height);
 
-	assert( map.size() == (width*height) );
+	assert( map.size() == (unsigned)(width*height) );
 
 	for( auto h : map )
 	{
@@ -450,7 +458,7 @@ void  C35::Board::AllToStream(ostream& o) const
 	WriteBinary(o,width);
 	WriteBinary(o,height);
 
-	assert( map.size() == (width*height) );
+	assert( map.size() == (unsigned)(width*height) );
 
 	for( auto h : map )
 	{
@@ -620,7 +628,7 @@ C35::Player* C35::Board::AddHumanControlled(UC hue)
 	p->board = new PlayerBoard(this);
 	p->pak = true;
 
-	assert( players.size() == p->id );
+	assert( (int)players.size() == p->id );
 
 	players.push_back(p);
 
@@ -638,14 +646,14 @@ C35::Player* C35::Board::AddComputerControlled(UC hue)
 	p->board = new PlayerBoard(this);
 	p->pak = false;
 
-	assert( players.size() == p->id );
+	assert( (int)players.size() == p->id );
 
 	players.push_back(p);
 
 	return p;
 }
 
-C35::Player* C35::Board::AddRemoteControlled(UC hue)
+C35::Player* C35::Board::AddRemoteControlled(UC )
 {
 	return 0; // NIY
 }

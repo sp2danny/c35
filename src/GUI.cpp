@@ -37,7 +37,7 @@ namespace
 	bool show_grid = true;
 
 	Font font_w, font_b;
-	TTF_Font* ttf_font;
+	//TTF_Font* ttf_font;
 
 	void ShadowText( SDL_Surface* s, string text, int x, int y, bool c = false, bool r = false )
 	{
@@ -45,23 +45,23 @@ namespace
 		(r?font_b:font_w).Print(s,text.c_str(),x+1,y+1,c);
 	}
 
-	char message[256] = {0};
+	[[maybe_unused]] char message[256] = {0};
 
-	bool show_infl = false;
+	[[maybe_unused]] bool show_infl = false;
 
-	bool in_road_to = false;
+	[[maybe_unused]] bool in_road_to = false;
 
-	bool in_rally = false;
-	City* rally_city;
+	[[maybe_unused]] bool in_rally = false;
+	[[maybe_unused]] City* rally_city;
 
-	bool in_city_view = false;
-	City* view_city;
+	[[maybe_unused]] bool in_city_view = false;
+	[[maybe_unused]] City* view_city;
 
-	Player* human = 0;
+	[[maybe_unused]] Player* human = 0;
 
-	bool in_tech_view = false;
+	[[maybe_unused]] bool in_tech_view = false;
 
-	SDL_Surface* ld_t(char* name)
+	SDL_Surface* ld_t(const char* name)
 	{
 		static char buf[256];
 		sprintf(buf,"gfx/%s.bmp",name);
@@ -102,16 +102,19 @@ namespace
 
 	std::list<FloatText> float_texts;
 
-	void MakeFloatText( int x, int y, string text, int pixmove, float life, int r, int g, int b)
+	//void MakeFloatText( int x, int y, string text, int pixmove, float life, int r, int g, int b)
+	void MakeFloatText( int , int , string , int , float , int , int , int )
 	{
+		/*
 		float_texts.emplace_back();
 		FloatText& ft = float_texts.back();
 		ft.fx = x; ft.fy = y;
 		ft.dx = 0; ft.dy = pixmove*-0.001f/life;
-		SDL_Color c= {r,g,b};
+		SDL_Color c= {(UC)r,(UC)g,(UC)b};
 		ft.tt = TTF_RenderText_Solid(ttf_font, text.c_str(), c );
 		ft.lifeleft=life;
 		ft.active=true;
+		*/
 	}
 
 	void UpdateFT(int ms)
@@ -140,14 +143,14 @@ namespace
 		for( FloatText& ft : float_texts )
 		{
 			if(!ft.active) continue;
-			SDL_Rect rr = { int(ft.fx) - offs_x, int(ft.fy) - offs_y, ft.tt->w, ft.tt->h };
+			SDL_Rect rr = { (short)(int(ft.fx) - offs_x), (short)(int(ft.fy) - offs_y), (unsigned short)(ft.tt->w), (unsigned short)(ft.tt->h) };
 			SDL_BlitSurface(ft.tt,0,SDL_GetVideoSurface(),&rr);
 		}
 	}
 
 	void grid_from_mouse(int& gx, int& gy)
 	{
-		const int MARG = 0;
+		[[maybe_unused]] const int MARG = 0;
 		float base = (mouse_y+offs_y) ;
 		if(base<0) base -= YSZ;
 		gy = base / YSZ ;
@@ -364,7 +367,7 @@ void C35::GUI::Update(int ms)
 const int MARG = 0;
 int OffsX() { int ox = (int)offs_x; ox = ox & ~1; return ox; }
 int OffsY() { int oy = (int)offs_y; oy = oy & ~1; return oy; }
-#define MakeMaster SDL_Rect MasterRect = { hex.px-OffsX(), hex.py-OffsY(), 128,128 }
+#define MakeMaster SDL_Rect MasterRect = { (short)(hex.px-OffsX()), (short)(hex.py-OffsY()), 128,128 }
 
 static int redo_count = 0;
 static int frame_count = 0;
@@ -536,8 +539,8 @@ void C35::GUI::Display()
 	}
 
 
-	AD& roads = Asset<AD>("gfx/roads.ad");
-	AD& overlay = Asset<AD>("gfx/overlay.ad");
+	[[maybe_unused]] AD& roads = Asset<AD>("gfx/roads.ad");
+	[[maybe_unused]] AD& overlay = Asset<AD>("gfx/overlay.ad");
 
 	// 3 - overlays
 	for(y=0;y<h;++y) for(x=0;x<w;++x)
@@ -644,7 +647,7 @@ void C35::GUI::Display()
 		}
 		else if( hex.obscure == 1 )
 		{
-			SDL_Rect dr=MasterRect;
+			[[maybe_unused]] SDL_Rect dr=MasterRect;
 			((y%2)?o_e:o_o).Refl(0).Overlay(screen,p);
 		}
 

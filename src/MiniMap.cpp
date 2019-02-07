@@ -171,6 +171,7 @@ void  C35::MiniMap::Display(SDL_Surface* dst, int tx,int ty)
 		Uint32 white = SDL_MapRGB( dst->format, 255,255,255 );
 		if( (offs_x>=0) && (offs_y>=0) )
 		{
+			/*
 			Draw_Line( dst, x,y, x,y+h , white );
 			Draw_Line( dst, (x+w)%w2,y, (x+w)%w2,y+h , white );
 			if( (x+w) > w2 )
@@ -183,6 +184,7 @@ void  C35::MiniMap::Display(SDL_Surface* dst, int tx,int ty)
 				Draw_Line( dst, x,y, x+w,y , white );
 				Draw_Line( dst, x,y+h, x+w,y+h , white );
 			}
+			*/
 		}
 	}
 

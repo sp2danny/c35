@@ -39,7 +39,7 @@ private:
 
 extern bool inside(SDL_Rect r);
 
-extern bool Button(int x,int y,char* txt);
+extern bool Button(int x,int y,const char* txt);
 
 class ListBox
 {

@@ -12,7 +12,7 @@
 #include <deque>
 
 #include "SDL.h"
-#include "SDL_draw.h"
-#include "SDL_ttf.h"
+//#include "SDL_draw.h"
+//#include "SDL_ttf.h"
 
 

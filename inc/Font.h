@@ -37,9 +37,9 @@ class RawFont
 public:
 	RawFont();
 
-	void FromFolder(char*);
-	void SaveFile(char*);
-	void LoadFile(char*);
+	void FromFolder(const char*);
+	void SaveFile(const char*);
+	void LoadFile(const char*);
 
 	void Instansiate(Font&, unsigned long int);
 	void MakeAD(C35::AnimDir& ad,bool shadow=false);

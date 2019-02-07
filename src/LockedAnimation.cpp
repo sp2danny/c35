@@ -47,6 +47,7 @@ short GetDir(C35::Dir6 d)
 		case C35::d6_downleft   : return 240;
 		case C35::d6_left       : return 180;
 		case C35::d6_upleft     : return 120;
+		default: break;
 	}
 	return 0;
 }

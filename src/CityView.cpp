@@ -57,7 +57,7 @@ void ShadowText ( SDL_Surface* srf, string text, int x, int y, bool center, bool
 	f_b.Print( srf, text.c_str(), x, y, center );
 }
 
-void C35::CityView::Update(int ms)
+void C35::CityView::Update([[maybe_unused]] int ms)
 {
 }
 
@@ -86,7 +86,7 @@ void C35::CityView::ParseInput(SDL_Event& e)
 		{
 			if(city->building_unit)
 			{
-				int idx;
+				unsigned int idx;
 				IdList AU = city->AvailUnit();
 				for(idx=0;idx<AU.size();++idx)
 					if(AU[idx]==city->build_id) break;
@@ -94,7 +94,7 @@ void C35::CityView::ParseInput(SDL_Event& e)
 				else city->building_unit=false;
 			} else if(city->building_improvement)
 			{
-				int idx;
+				unsigned int idx;
 				IdList AI = city->AvailImp();
 				for(idx=0;idx<AI.size();++idx)
 					if(AI[idx]==city->build_id) break;
@@ -180,7 +180,7 @@ void C35::CityView::Display()
 		int x=0;
 		while(true)
 		{
-			SDL_Rect r = { x,y,gui_tile->w,gui_tile->h };
+			SDL_Rect r = { (short)(x),(short)(y),(unsigned short)(gui_tile->w),(unsigned short)(gui_tile->h) };
 			SDL_BlitSurface( gui_tile, 0, screen, &r );
 			x += gui_tile->w;
 			if( x >= WW ) break;
@@ -199,12 +199,12 @@ void C35::CityView::Display()
 	//int old_ofs_x = offs_x;
 	//int old_ofs_y = offs_y;
 	Board* brd = city->owner->game;
-	Hexagon& h = brd->Get(city->x,city->y);
+	[[maybe_unused]] Hexagon& h = brd->Get(city->x,city->y);
 	//offs_x = h.px - WW/2 -MARG -9 + 64;
 	//offs_y = h.py - HH/2 -MARG/2 +17 + 64;
 	//in_city_view=false;
-	int HW = 110;
-	SDL_Rect cr = { WW/2-SZ*3-15 ,HH/2-YSZ*3-15, SZ*6+30, YSZ*6+30 };
+	[[maybe_unused]] int HW = 110;
+	SDL_Rect cr = { (short)(WW/2-SZ*3-15) ,(short)(HH/2-YSZ*3-15), (unsigned short)(SZ*6+30), (unsigned short)(YSZ*6+30) };
 	SDL_SetClipRect( SDL_GetVideoSurface(), &cr );
 	//Display(false);
 	SDL_SetClipRect( SDL_GetVideoSurface(), 0 );
@@ -219,7 +219,7 @@ void C35::CityView::Display()
 	{
 		if( city->resources[r] )
 		{
-			SDL_Rect rr = { 42*r-32,10,32,32 };
+			[[maybe_unused]] SDL_Rect rr = { (short)(42*r-32),10,32,32 };
 			//SDL_BlitSurface( res[r], 0, screen, &rr );
 		}
 	}
@@ -248,7 +248,7 @@ void C35::CityView::Display()
 
 	if( !city->building_unit && !city->building_improvement)
 	{
-		SDL_Rect r = { FH/2,y,maxw+FH+FH,FH };
+		SDL_Rect r = { (short)(FH/2),(short)(y),(unsigned short)(maxw+FH+FH),(unsigned short)(FH) };
 		SDL_FillRect(screen,&r,grey);
 	}
 	ImprovementType::icons.Refl(0,0).Overlay(screen,FH,y);
@@ -262,7 +262,7 @@ void C35::CityView::Display()
 		if( city->building_unit && city->build_id==i )
 		{
 			//shl = ut.cost;
-			SDL_Rect r = { FH/2,y,maxw+FH+FH,FH };
+			SDL_Rect r = { (short)(FH/2),(short)(y),(unsigned short)(maxw+FH+FH),(unsigned short)(FH) };
 			SDL_FillRect(screen,&r,grey);
 		}
 		ut.GetIcon(GameEngine::PAK()).Overlay(screen, FH,y);
@@ -278,7 +278,7 @@ void C35::CityView::Display()
 		if( city->building_improvement && city->build_id==i )
 		{
 			//shl = it.cost;
-			SDL_Rect r = { FH/2,y,maxw+FH+FH,FH };
+			SDL_Rect r = { (short)(FH/2),(short)(y),(unsigned short)(maxw+FH+FH),(unsigned short)(FH) };
 			SDL_FillRect(screen,&r,grey);
 		}
 		it.Refl().Overlay(screen,FH,y);

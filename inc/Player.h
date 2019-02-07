@@ -20,7 +20,7 @@ namespace C35
 
 	struct Player
 	{
-		char* name;
+		const char* name;
 		Color color;
 
 		int id;

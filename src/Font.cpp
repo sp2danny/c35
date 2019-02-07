@@ -87,7 +87,7 @@ int Font::Width(const char* text)
 	char c;
 	const char* p;
 	int len = 0;
-	for(p=text;c=*p;++p)
+	for(p=text;(c=*p);++p)
 	{
 		unsigned char uc = static_cast<unsigned char>(c);
 		SDL_Surface* s = font[uc];
@@ -104,18 +104,18 @@ void Font::Print( SDL_Surface* dest, const char* text, int x,int y, bool center 
 
 	char c;
 	const char* p;
-	for(p=text;c=*p;++p)
+	for(p=text;(c=*p);++p)
 	{
 		unsigned char uc = static_cast<unsigned char>(c);
 		SDL_Surface* s = font[uc];
 		if(!s) continue;
-		SDL_Rect r = { x,y,s->w,s->h };
+		SDL_Rect r = { (short)(x),(short)(y),(unsigned short)(s->w),(unsigned short)(s->h) };
 		SDL_BlitSurface(s,0,dest,&r);
 		x+=s->w;
 	}
 }
 
-void Font::Lines( SDL_Surface* dest, const char*, int,int, int )
+void Font::Lines( SDL_Surface* , const char*, int,int, int )
 {
 }
 
@@ -199,7 +199,7 @@ RawFont::RawFont()
 {
 }
 
-void RawFont::FromFolder(char* fn)
+void RawFont::FromFolder(const char* fn)
 {
 	height=0;
 
@@ -251,7 +251,7 @@ static int len_from( int w, int h )
 	return (l/8) + ((l%8)?1:0);
 }
 
-void RawFont::SaveFile(char* fn)
+void RawFont::SaveFile(const char* fn)
 {
 	FILE* fp = fopen(fn,"wb");
 
@@ -322,7 +322,7 @@ void RawFont::Char::FromBytes()
 	}
 }
 
-void RawFont::LoadFile(char* fn)
+void RawFont::LoadFile(const char* fn)
 {
 	FILE* fp = fopen(fn,"rb");
 
@@ -360,7 +360,7 @@ void RawFont::LoadFile(char* fn)
 	fclose(fp);
 }
 
-SDL_Surface* RawFont::Char::MakeImg( unsigned long int color )
+SDL_Surface* RawFont::Char::MakeImg( unsigned long int  )
 {
 	if(!width) return 0;
 	SDL_PixelFormat* pf = SDL_GetVideoSurface()->format;
@@ -375,9 +375,9 @@ SDL_Surface* RawFont::Char::MakeImg( unsigned long int color )
 		{
 			if( bits[idx++] )
 			{
-				Draw_Pixel(surf,x,y,color);
+				//Draw_Pixel(surf,x,y,color);
 			} else {
-				Draw_Pixel(surf,x,y,trans);
+				//Draw_Pixel(surf,x,y,trans);
 			}
 		}
 	}

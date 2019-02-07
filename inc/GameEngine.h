@@ -16,10 +16,10 @@ namespace C35
 	public:
 		static void Init();
 
-		static void LoadGame(char*);
-		static void LoadMap(char*);
+		static void LoadGame(const char*);
+		static void LoadMap(const char*);
 		static void RandomMap();
-		static void SaveGame(char*);
+		static void SaveGame(const char*);
 
 		static void Update(int);
 
