@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <cstdlib>
 
 struct SDL_Surface;
 struct SDL_PixelFormat;
@@ -106,8 +107,8 @@ namespace C35
 
 }
 
-inline std::string IntToStr(int i) { char buff[16]; _itoa(i,buff,10); return std::string(buff); }
-inline std::string IntToStrPad(int i,int n,char p) { char buff[32]; _itoa(i,buff,10); std::string s = buff; while(s.length()<n) s=p+s; return s; }
+inline std::string IntToStr(int i) { return std::to_string(i); }
+inline std::string IntToStrPad(int i,unsigned n,char p) { std::string s = std::to_string(i); while(s.length()<n) s=p+s; return s; }
 
 template <typename T> inline void ReadBinary( std::istream& istr , T& val )
 {

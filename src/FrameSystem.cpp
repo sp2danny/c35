@@ -1,5 +1,10 @@
 
-#include "stdafx.h"
+#include <list>
+#include <cassert>
+
+#include "SDL.h"
+//#include "SDL_draw.h"
+//#include "SDL_ttf.h"
 
 // --------------------------------------------
 
@@ -17,34 +22,11 @@ C35::Frame* C35::Frame::system = 0;
 
 SDL_Surface* C35::Frame::screen = 0;
 
-#ifndef _DEBUG
-#include <Windows.h>
-#endif
-
 namespace {
-	#ifdef _DEBUG
-		const int WW = 1024;
-		const int HH =  768;
-		//const int WW = 1680;
-		//const int HH = 1050;
 
-	#else
-		//const int WW = 1680;
-		//const int HH = 1050;
+	const int WW = 1024;
+	const int HH =  768;
 
-		//const int WW = 1024;
-		//const int HH =  768;
-
-		//const int WW = 1280;
-		//const int HH = 1024;
-
-		RECT r;
-		BOOL ok = GetWindowRect( GetDesktopWindow(), &r );
-
-		/*const*/ int WW = ok ? r.right  : 1280 ;
-		/*const*/ int HH = ok ? r.bottom : 1024 ;
-
-	#endif
 }
 
 void C35::Frame::Init(std::string name)
@@ -69,7 +51,7 @@ void C35::Frame::Init(std::string name)
 
 	srand(SDL_GetTicks());
 
-	TTF_Init();
+	//TTF_Init();
 }
 
 void C35::Frame::AddListener(InputTarget* it)
