@@ -755,8 +755,6 @@ void C35::Unit::Display(int x,int y)
 	UnitType& ut = UnitType::Lookup( type );
 	bool notype = ( ut.basetype == UnitType::None );
 
-	extern const int SZ,YSZ;
-
 	if(!notype)
 	{
 
@@ -805,6 +803,8 @@ bool C35::Unit::CanLoad(const Unit* u) const
 	case UnitType::Sea:
 	case UnitType::Air:
 		return false;
+	default:
+		break;
 	}
 	UnitType& ut_me = UnitType::Lookup(type);
 
@@ -863,7 +863,7 @@ C35::Capabilities& C35::Unit::Capa()
 
 	Hexagon& hex = owner->game->Get(x,y);
 
-	Movement& mm = MakeMovement();
+	Movement&& mm = MakeMovement();
 
 	capa.canMove          = hm;
 	capa.canAttack        = hm && stats.off;

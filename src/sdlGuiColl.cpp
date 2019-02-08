@@ -79,6 +79,7 @@ void EditField::Display()
 
 	if( f->Width(text.c_str()) > w )
 	{
+		/*
 		static bool first = true;
 		static TTF_Font* ttf_font;
 		static SDL_Color col = { 0,0,0 };
@@ -93,6 +94,7 @@ void EditField::Display()
 		SDL_Rect r = { x,y,tt->w,tt->h };
 		SDL_BlitSurface(tt,0,s,&r);
 		SDL_FreeSurface(tt);
+		*/
 	} else {
 		f->Print(s,ss.c_str(),x,y);
 	}
@@ -179,11 +181,9 @@ bool Button(int x,int y,const char* txt)
 // ***************
 
 ListBox::ListBox(int _x,int _y,int _w,int _h,Font& _f)
-	: x(_x), y(_y), w(_w), h(_h), f(_f)
+	: sel(false), si(0), f(_f), x(_x), y(_y), w(_w), h(_h), visible(true)
 {
 	lines.clear();
-	visible = true;
-	sel = false;
 }
 
 ListBox::~ListBox()

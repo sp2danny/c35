@@ -38,7 +38,7 @@ bool pal_is_dith(UC p)
 	return p >= 224;
 }
 
-void DBG_LOG(char*)
+void DBG_LOG(const char*)
 {
 }
 

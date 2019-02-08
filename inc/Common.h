@@ -13,6 +13,9 @@ union SDL_Event;
 
 namespace C35
 {
+	extern const int SZ, YSZ;
+	extern float offs_x, offs_y;
+
 	using std::string;
 	using std::vector;
 	using std::ostream;

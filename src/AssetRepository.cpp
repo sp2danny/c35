@@ -7,11 +7,12 @@
 
 using namespace std;
 
+/*
 template <typename T>
-map<string,T*> C35::Asset<T>::repository;
+std::map<std::string,T*> C35::Asset<T>::repository;
 
 template <typename T>
-C35::Asset<T>::Asset(string fn)
+C35::Asset<T>::Asset(std::string fn)
 {
 	auto itr = repository.find(fn);
 	if( itr != repository.end() )
@@ -33,7 +34,7 @@ C35::Asset<T>::operator T& ()
 {
 	return *me;
 }
-
+*/
 
 void Dummy()
 {

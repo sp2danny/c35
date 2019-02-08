@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Daniel Nyström
-Date                   :=02/07/19
+Date                   :=02/08/19
 CodeLitePath           :="/home/sp2danny/.codelite"
 LinkerName             :=/usr/bin/clang++ 
 SharedObjectLinkerName :=/usr/bin/clang++ -shared -fPIC
@@ -39,9 +39,9 @@ LinkOptions            :=
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)src $(IncludeSwitch)inc $(IncludeSwitch)/usr/include/SDL $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := 
-ArLibs                 :=  
-LibPath                := $(LibraryPathSwitch). 
+Libs                   := $(LibrarySwitch)SDL 
+ArLibs                 :=  "SDL" 
+LibPath                := $(LibraryPathSwitch)/usr/lib/x86_64-linux-gnu 
 
 ##
 ## Common variables
@@ -50,7 +50,7 @@ LibPath                := $(LibraryPathSwitch).
 AR       := /usr/bin/ar rcu
 CXX      := /usr/bin/clang++ 
 CC       := /usr/bin/clang 
-CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++17 -Wno-gnu-anonymous-struct -Wno-nested-anon-types -Wno-c++11-narrowing -Wno-unused-function -Wno-unused-variable -Wno-missing-field-initializers -Wno-unused-parameter -g -O0 $(Preprocessors)
+CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++17 -Wno-gnu-anonymous-struct -Wno-nested-anon-types -Wno-c++11-narrowing -Wno-unused-function -Wno-unused-variable -Wno-missing-field-initializers -Wno-unused-parameter -Wno-sign-compare -g -O0 $(Preprocessors)
 CFLAGS   := -Wall -g -O0 $(Preprocessors)
 ASFLAGS  := 
 AS       := /usr/bin/as 

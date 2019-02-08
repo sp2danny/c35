@@ -62,14 +62,15 @@
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
-      <Compiler Options="-Wall -Wextra -Werror -pedantic -std=c++17 -Wno-gnu-anonymous-struct -Wno-nested-anon-types -Wno-c++11-narrowing -Wno-unused-function -Wno-unused-variable -Wno-missing-field-initializers -Wno-unused-parameter" C_Options="-Wall" Assembler="">
+      <Compiler Options="-Wall -Wextra -Werror -pedantic -std=c++17 -Wno-gnu-anonymous-struct -Wno-nested-anon-types -Wno-c++11-narrowing -Wno-unused-function -Wno-unused-variable -Wno-missing-field-initializers -Wno-unused-parameter -Wno-sign-compare" C_Options="-Wall" Assembler="">
         <IncludePath Value="."/>
         <IncludePath Value="src"/>
         <IncludePath Value="inc"/>
         <IncludePath Value="/usr/include/SDL"/>
       </Compiler>
       <Linker Options="">
-        <LibraryPath Value="."/>
+        <LibraryPath Value="/usr/lib/x86_64-linux-gnu"/>
+        <Library Value="SDL"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>

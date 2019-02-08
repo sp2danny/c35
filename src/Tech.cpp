@@ -180,7 +180,7 @@ string C35::TechType::Description() const
 	dd += Name + "\n";
 	int i,n;
 
-	if( n=requiresTech.size() )
+	if( (n=requiresTech.size()) )
 	{
 		dd += "Requires ";
 		for(i=0;i<n;++i)
@@ -192,7 +192,7 @@ string C35::TechType::Description() const
 		dd += " to research.\n";
 	}
 
-	if( n=enablesResource.size() )
+	if( (n=enablesResource.size()) )
 	{
 		dd += "New resource";
 		if(n>1) dd+="s";
@@ -206,7 +206,7 @@ string C35::TechType::Description() const
 		dd += " appears on the map.\n";
 	}
 
-	if( n=enablesUnit.size() )
+	if( (n=enablesUnit.size()) )
 	{
 		dd += "New unit";
 		if(n>1) dd+="s";
@@ -220,7 +220,7 @@ string C35::TechType::Description() const
 		dd += " are now available.\n";
 	}
 
-	if( n=enablesImprovement.size() )
+	if( (n=enablesImprovement.size()) )
 	{
 		dd += "New city improvment";
 		if(n>1) dd+="s";

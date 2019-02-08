@@ -23,13 +23,13 @@
 using namespace C35;
 using namespace std;
 
-extern const int SZ;
-extern const int YSZ;
+namespace C35
+{
+	const int SZ = 60;
+	const int YSZ = 47;
 
-const int SZ = 60;
-const int YSZ = 47;
-
-float offs_x=0.0f, offs_y=0.0f;
+	float offs_x=0.0f, offs_y=0.0f;
+}
 
 namespace
 {

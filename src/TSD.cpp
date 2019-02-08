@@ -37,8 +37,8 @@ namespace C35
 	private:
 		C35::TechTree* ttp;
 		SDL_Surface* bg;
-		TTF_Font* fnt_big;
-		TTF_Font* fnt_sml;
+		//TTF_Font* fnt_big;
+		//TTF_Font* fnt_sml;
 		int mx,my;
 		C35::Player* pp;
 		float scale;
@@ -66,7 +66,7 @@ namespace C35
 		typedef map<int,TechBox>::iterator MITBI;
 
 		void AddArrows(SDL_Surface* target);
-		void C35::TSD::TechScreenStart(TechTree* tt,Player* p);
+		void TechScreenStart(TechTree* tt,Player* p);
 		void Init();
 		SDL_Surface* BoxMaker( SDL_Surface* src, int x1,int x2, int y1,int y2, int w,int h );
 
@@ -104,8 +104,8 @@ void C35::TSD::Init()
 	bg = tmp;
 	//bg = SDL_Resize(bg,screen->w,screen->h);
 
-	fnt_big = TTF_OpenFont("gfx/arial.ttf",36);
-	fnt_sml = TTF_OpenFont("gfx/arial.ttf",12);
+	//fnt_big = TTF_OpenFont("gfx/arial.ttf",36);
+	//fnt_sml = TTF_OpenFont("gfx/arial.ttf",12);
 
 	box2 = BoxMaker(box, 13,78, 23,85, 160*scale,70*scale );
 	box3 = BoxMaker(box, 13,78, 23,85, 120*scale,70*scale );
@@ -243,22 +243,22 @@ void C35::TSD::Display()
 
 	SDL_BlitSurface(bg,0,target,0);
 
-	SDL_Color col = { 0,0,0, 0 };
-	SDL_Surface* heading = TTF_RenderText_Solid(fnt_big, "Tech Tree", col );
-	SDL_Rect dr = { ( bg->w - heading->w ) / 2 , 15 };
-	SDL_BlitSurface(heading,0,target,&dr);
-	SDL_FreeSurface(heading);
+	//SDL_Color col = { 0,0,0, 0 };
+	//SDL_Surface* heading = TTF_RenderText_Solid(fnt_big, "Tech Tree", col );
+	//SDL_Rect dr = { ( bg->w - heading->w ) / 2 , 15 };
+	//SDL_BlitSurface(heading,0,target,&dr);
+	//SDL_FreeSurface(heading);
 
 	SDL_Color col2 = { 0,0,64, 0 };
 	for( auto itr : boxes )
 	{
 		TechBox& tb = itr.second;
-		SDL_Rect dr2 = { tb.x, tb.y };
-		SDL_BlitSurface( tb.box,0,target,&dr2);
-		SDL_Surface* txt = TTF_RenderText_Solid(fnt_sml, tb.name.c_str(), col2 );
-		SDL_Rect dr3 = { tb.x+12, tb.y-1 };
-		SDL_BlitSurface(txt,0,target,&dr3);
-		SDL_FreeSurface(txt);
+		//SDL_Rect dr2 = { tb.x, tb.y };
+		//SDL_BlitSurface( tb.box,0,target,&dr2);
+		//SDL_Surface* txt = TTF_RenderText_Solid(fnt_sml, tb.name.c_str(), col2 );
+		//SDL_Rect dr3 = { tb.x+12, tb.y-1 };
+		//SDL_BlitSurface(txt,0,target,&dr3);
+		//SDL_FreeSurface(txt);
 		int x = tb.x+10;
 		int y = tb.y+15;
 		for(CIS* cis : tb.icons)

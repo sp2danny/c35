@@ -74,6 +74,7 @@ namespace C35
 		void Set(BasicAnim*,UC);
 		void Set(CIS*,UC);
 		void Set(AnimReflection& ar) { (*this)=ar; }
+		void Set(AnimReflection&& ar) { (*this)=ar; }
 		AnimReflection();
 		AnimReflection(BasicAnim*,UC);
 		AnimReflection(CIS*,UC);
