@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Workspace Name="c35" Database="/home/sp2danny/extra/c35/.codelite/c35.tags">
+<CodeLite_Workspace Name="c35" Database="/home/sp2danny/extra/c35/.codelite/c35.tags" Version="10.0.0">
   <Project Name="c35" Path="c35.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">

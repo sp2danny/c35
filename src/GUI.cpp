@@ -105,6 +105,7 @@ namespace
 	//void MakeFloatText( int x, int y, string text, int pixmove, float life, int r, int g, int b)
 	void MakeFloatText( int , int , string , int , float , int , int , int )
 	{
+		//ft.tt = nullptr;
 		/*
 		float_texts.emplace_back();
 		FloatText& ft = float_texts.back();
@@ -129,7 +130,8 @@ namespace
 			ft.lifeleft -= ms/1000.0f;
 			if(ft.lifeleft<0)
 			{
-				SDL_FreeSurface( ft.tt );
+				if (ft.tt)
+					SDL_FreeSurface( ft.tt );
 				ft.active=false;
 			}
 		}

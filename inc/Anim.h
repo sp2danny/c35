@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdint>
 
 #include "Common.h"
 
@@ -53,7 +54,7 @@ namespace C35
 
 	private:
 		SDL_Surface* surface;
-		signed short hx,hy;
+		std::int16_t hx,hy;
 		//bool owner;
 	};
 
@@ -83,9 +84,9 @@ namespace C35
 		void clr();
 		BasicAnim* ba;
 		CIS* cis;
-		int current;
-		int time,last;
-		int loopcnt;
+		std::int32_t current;
+		std::int32_t time,last;
+		std::int32_t loopcnt;
 		UC hue;
 	};
 
@@ -94,8 +95,8 @@ namespace C35
 		enum PixelType { normal=0, alpha, trans, colimp };
 
 	//private:
-		unsigned short w,h;
-		signed short hx,hy;
+		std::uint16_t w,h;
+		std::int16_t hx,hy;
 		bool has_dither;
 		bool has_trans;
 		bool has_colimp;
@@ -164,9 +165,9 @@ namespace C35
 	typedef struct BasicAnim
 	{
 		BasicAnim() : delay(0), repeating(false), jbf(0) {}
-		short delay;
+		std::int16_t delay;
 		bool repeating;
-		short jbf; // jump back frame
+		std::int16_t jbf; // jump back frame
 		std::vector<CIS> anim;
 		void Load( std::istream& );
 		void Save( std::ostream& );
@@ -196,7 +197,7 @@ namespace C35
 	typedef struct AnimDir
 	{
 		struct BAD : BasicAnim {
-			short dir,mirrorof;
+			std::int16_t dir,mirrorof;
 			bool mirror,flipx,flipy,rot90;
 			BAD() : mirror(false) {}
 		};

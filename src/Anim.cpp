@@ -8,12 +8,12 @@
 using namespace std;
 
 template<typename T,typename U>
-T& BestFit( short dir, U& vec )
+T& BestFit( std::int16_t dir, U& vec )
 {
-	auto dirdiff = [](short d1,short d2) -> short
+	auto dirdiff = [](std::int16_t d1,std::int16_t d2) -> short
 	{
-		short df = abs(d1-d2);
-		if(df>180) df=360-180;
+		std::int16_t df = abs(d1-d2);
+		if (df>180) df=360-180;
 		return df;
 	};
 
@@ -21,10 +21,10 @@ T& BestFit( short dir, U& vec )
 	int n = vec.size();
 	assert(n);
 	int srt = dirdiff( dir, vec[0].dir );
-	for(int i=1;i<n;++i)
+	for (int i=1;i<n;++i)
 	{
 		int s = dirdiff( dir, vec[i].dir );
-		if(s<srt)
+		if (s<srt)
 		{
 			srt=s;
 			idx=i;
@@ -381,9 +381,9 @@ void C35::CIS::SaveInternal( ostream& os )
 	{
 		if(odd) WriteBinary(os,cc);
 	};
-	auto PutC_8 = [&cc](std::ostream& os,UC) -> void
+	auto PutC_8 = [](std::ostream& os,UC uc) -> void
 	{
-		WriteBinary(os,cc);
+		WriteBinary(os,uc);
 	};
 	auto PutC_6 = [&](std::ostream& ,UC ) -> void
 	{
@@ -446,7 +446,8 @@ void C35::CIS::Load( istream& is )
 	is.read(buff,4);
 	if( string(buff) != "CIS2" )
 	{
-		is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
+		is.seekg(-4, ios_base::cur);
+		//is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
 		LoadOld(is);
 	} else {
 		ReadBinary( is, w );
@@ -982,7 +983,6 @@ void C35::CIS::Scale50h()
 				case colimp:  cli.push_back(pixels[idx]);
 			}
 		}
-
 
 		for( int n = 2; n>0; --n )
 		{
@@ -1573,14 +1573,14 @@ void C35::BasicAnim::FreeData()
 
 void C35::BasicAnim::SaveInternal(ostream& os)
 {
-	short val = anim.size();
+	std::int16_t val = anim.size();
 	WriteBinary( os, val );
 	for(int i=0;i<val;++i)
 		anim[i].Save(os);
 }
 void C35::BasicAnim::LoadInternal(istream& is,bool old)
 {
-	short val;
+	std::int16_t val;
 	ReadBinary( is, val );
 	anim.clear();
 	for(int i=0;i<val;++i)
@@ -1597,7 +1597,7 @@ void C35::BasicAnim::LoadInternal(istream& is,bool old)
 void C35::BasicAnim::LoadOld( istream& is )
 {
 	ReadBinary( is, delay );
-	short val;
+	std::int16_t val;
 	ReadBinary( is, val );
 	repeating = (bool) val;
 	jbf=0;
@@ -1607,7 +1607,7 @@ void C35::BasicAnim::LoadOld( istream& is )
 void C35::BasicAnim::SaveOld( ostream& os )
 {
 	WriteBinary( os, delay );
-	short val = (short)repeating;
+	std::int16_t val = (short)repeating;
 	WriteBinary( os, val );
 	SaveInternal(os);
 }
@@ -1618,11 +1618,12 @@ void C35::BasicAnim::Load( istream& is )
 	is.read(buff,4);
 	if( string(buff) != "BA_2" )
 	{
-		is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
+		is.seekg(-4, ios_base::cur);
+		//is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
 		LoadOld(is);
 	} else {
 		ReadBinary( is, delay );
-		short val;
+		std::int16_t val;
 		ReadBinary( is, val );
 		repeating = (bool) (val>>15);
 		jbf = val & 0x7FFF;
@@ -1634,7 +1635,7 @@ void C35::BasicAnim::Save( ostream& os )
 {
 	os.write("BA_2",4);
 	WriteBinary( os, delay );
-	short val = (short)repeating;
+	std::int16_t val = (std::int16_t)repeating;
 	val = val << 15;
 	val = val | jbf;
 	WriteBinary( os, val );
@@ -1697,7 +1698,7 @@ void C35::AnimDir::FreeData()
 
 void C35::AnimDir::LoadInternal(istream& is,bool old)
 {
-	short i,n;
+	std::int16_t i,n;
 	ReadBinary(is,n);
 	bad.clear();
 	bad.reserve(n);
@@ -1734,7 +1735,8 @@ void C35::AnimDir::Load(istream& is)
 	is.read(buff,4);
 	if( string(buff) != "AD_2" )
 	{
-		is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
+		is.seekg(-4, ios_base::cur);
+		//is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
 		LoadOld(is);
 	} else {
 		LoadInternal(is);
@@ -1886,8 +1888,8 @@ static std::string LoadStr( std::istream& is )
 	{
 		char c;
 		ReadBinary(is,c);
-		if(!c) break;
-		s+=c;
+		if (!c) break;
+		s += c;
 	}
 	return s;
 }
@@ -1937,7 +1939,8 @@ void C35::NAV::Load(istream& is)
 	is.read(buff,4);
 	if( string(buff) != "NAV2" )
 	{
-		is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
+		is.seekg(-4, ios_base::cur);
+		//is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
 		LoadOld(is);
 	} else {
 		LoadInternal(is);
@@ -1962,6 +1965,7 @@ bool C35::AnimCollection::LoadExt(string fn)
 	string ext = ExtractFileExt(fn);
 	if(ext=="ac")
 	{
+		std::cout << "loading file " << fn << " ext " << ext << std::endl;
 		ifstream ifs(fn,ios::in|ios::binary);
 		Load(ifs);
 		return true;
@@ -2098,10 +2102,12 @@ void C35::AnimCollection::Save(ostream& os)
 void C35::AnimCollection::Load(istream& is)
 {
 	char buff[5] = {};
+	std::cout << "Loading AC, at pos " << is.tellg() << std::endl;
 	is.read(buff,4);
 	if( string(buff) != "AC_2" )
 	{
-		is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
+		is.seekg(-4, ios_base::cur);
+		//is.putback(buff[3]).putback(buff[2]).putback(buff[1]).putback(buff[0]);
 		LoadOld(is);
 		default_anim.clear();
 	} else {
