@@ -2,7 +2,7 @@
 
 All:
 	@echo "----------Building project:[ c35 - Debug ]----------"
-	@"$(MAKE)" -f  "c35.mk"
+	@$(MAKE) -f  "c35.mk"
 clean:
 	@echo "----------Cleaning project:[ c35 - Debug ]----------"
-	@"$(MAKE)" -f  "c35.mk" clean
+	@$(MAKE) -f  "c35.mk" clean

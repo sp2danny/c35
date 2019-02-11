@@ -1,82 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Session Name="/home/daniel/project/c35/c35.workspace">
-  <int Value="7" Name="m_selectedTab"/>
-  <wxString Value="/home/daniel/project/c35/c35.workspace" Name="m_workspaceName"/>
+<Session Name="/home/sp2danny/extra/c35/c35.workspace">
+  <int Value="0" Name="m_selectedTab"/>
+  <wxString Value="/home/sp2danny/extra/c35/c35.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
-      <wxString Value="/home/daniel/project/c35/src/Main.cpp" Name="FileName"/>
-      <int Value="3" Name="FirstVisibleLine"/>
-      <int Value="13" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/daniel/project/c35/src/GUI.cpp" Name="FileName"/>
-      <int Value="241" Name="FirstVisibleLine"/>
-      <int Value="251" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/daniel/project/c35/src/Font.cpp" Name="FileName"/>
-      <int Value="316" Name="FirstVisibleLine"/>
-      <int Value="326" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/daniel/project/c35/src/LoadScreen.cpp" Name="FileName"/>
-      <int Value="89" Name="FirstVisibleLine"/>
-      <int Value="98" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/daniel/project/c35/src/FrameSystem.cpp" Name="FileName"/>
-      <int Value="147" Name="FirstVisibleLine"/>
-      <int Value="106" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/daniel/project/c35/src/GameEngine.cpp" Name="FileName"/>
-      <int Value="20" Name="FirstVisibleLine"/>
+      <wxString Value="/home/sp2danny/extra/c35/src/Main.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
       <int Value="30" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/daniel/project/c35/src/Menu.cpp" Name="FileName"/>
-      <int Value="250" Name="FirstVisibleLine"/>
-      <int Value="267" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/daniel/project/c35/src/Anim.cpp" Name="FileName"/>
-      <int Value="2095" Name="FirstVisibleLine"/>
-      <int Value="2105" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/daniel/project/c35/inc/Anim.h" Name="FileName"/>
-      <int Value="117" Name="FirstVisibleLine"/>
-      <int Value="0" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/daniel/project/c35/inc/Common.h" Name="FileName"/>
-      <int Value="123" Name="FirstVisibleLine"/>
-      <int Value="142" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/usr/include/c++/7/bits/stl_vector.h" Name="FileName"/>
-      <int Value="669" Name="FirstVisibleLine"/>
-      <int Value="670" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

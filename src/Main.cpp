@@ -6,7 +6,6 @@
 #include "FrameSystem.h"
 #include "FrameForwards.h"
 
-
 void Main()
 {
 	C35::Frame::Init( "C35" );
