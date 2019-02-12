@@ -365,7 +365,7 @@ SDL_Surface* RawFont::Char::MakeImg( unsigned long int  )
 	if(!width) return 0;
 	SDL_PixelFormat* pf = SDL_GetVideoSurface()->format;
 	SDL_Surface* surf;
-	surf=SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCCOLORKEY, width, height, pf->BitsPerPixel, pf->Rmask, pf->Gmask, pf->Bmask, pf->Amask);
+	surf=SDL_CreateRGBSurface(SDL_SWSURFACE|SDL_SRCCOLORKEY, width, height, pf->BitsPerPixel, pf->Rmask, pf->Gmask, pf->Bmask, pf->Amask);
 	unsigned long int trans = SDL_MapRGB(pf,255,0,255);
 	SDL_SetColorKey(surf,SDL_SRCCOLORKEY,trans);
 	int idx = 0;

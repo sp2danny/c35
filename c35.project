@@ -71,6 +71,7 @@
       <Linker Options="">
         <LibraryPath Value="/usr/lib/x86_64-linux-gnu"/>
         <Library Value="SDL"/>
+        <Library Value="SDL_ttf"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>

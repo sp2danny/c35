@@ -37,7 +37,7 @@ namespace
 	bool show_grid = true;
 
 	Font font_w, font_b;
-	//TTF_Font* ttf_font;
+	TTF_Font* ttf_font;
 
 	void ShadowText( SDL_Surface* s, string text, int x, int y, bool c = false, bool r = false )
 	{
@@ -102,11 +102,11 @@ namespace
 
 	std::list<FloatText> float_texts;
 
-	//void MakeFloatText( int x, int y, string text, int pixmove, float life, int r, int g, int b)
-	void MakeFloatText( int , int , string , int , float , int , int , int )
+	void MakeFloatText( int x, int y, string text, int pixmove, float life, int r, int g, int b)
+	//void MakeFloatText( int , int , string , int , float , int , int , int )
 	{
 		//ft.tt = nullptr;
-		/*
+		///*
 		float_texts.emplace_back();
 		FloatText& ft = float_texts.back();
 		ft.fx = x; ft.fy = y;
@@ -115,16 +115,19 @@ namespace
 		ft.tt = TTF_RenderText_Solid(ttf_font, text.c_str(), c );
 		ft.lifeleft=life;
 		ft.active=true;
-		*/
+		//*/
 	}
 
 	void UpdateFT(int ms)
 	{
-		bool found=false;
-		for( FloatText& ft : float_texts )
+		auto iter = float_texts.begin();
+		while (iter != float_texts.end())
 		{
-			if(!ft.active) continue;
-			found=true;
+			auto& ft = *iter;
+			if (!ft.active) {
+				iter = float_texts.erase(iter);
+				continue;
+			}
 			ft.fx += ft.dx*ms;
 			ft.fy += ft.dy*ms;
 			ft.lifeleft -= ms/1000.0f;
@@ -134,9 +137,8 @@ namespace
 					SDL_FreeSurface( ft.tt );
 				ft.active=false;
 			}
+			++iter;
 		}
-
-		if(!found) float_texts.clear();
 	}
 
 	void DisplayFT()
@@ -320,6 +322,9 @@ C35::GUI::GUI()
 		border.Instance(hue);
 	}
 	
+	TTF_Init();
+	ttf_font = TTF_OpenFont("gfx/arial.ttf", 12);
+	
 	MiniMap::Init();
 }
 
@@ -364,6 +369,8 @@ void C35::GUI::Update(int ms)
 	}
 
 	MiniMap::Update( * GameEngine::PAK()->board );
+	
+	UpdateFT(ms);
 }
 
 const int MARG = 0;
@@ -716,6 +723,8 @@ void C35::GUI::Display()
 
 	UnitInfo::Display(mouse_x,mouse_y);
 
+	DisplayFT();
+
 	if(Menu::Active()) Menu::Display(mouse_x,mouse_y);
 }
 
@@ -792,6 +801,11 @@ void C35::GUI::ParseInput(SDL_Event& e)
 		if( e.key.keysym.sym == SDLK_DOWN  ) dy += +1;
 		if( e.key.keysym.sym == SDLK_LEFT  ) dx -= +1;
 		if( e.key.keysym.sym == SDLK_RIGHT ) dx += +1;
+		
+		if (e.key.keysym.sym == SDLK_f)
+		{
+			MakeFloatText(100, 100, "hello", 3, 1.5f, 255,255,0);
+		}
 
 		bool processed = UnitAction::ProcessKeypress(&e);
 

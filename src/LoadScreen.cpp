@@ -210,8 +210,8 @@ void C35::LoadScreen::Display()
 	//if( Button(850+ox,y+=80,"Make Barb")  ) if(lmd) { lmd=false; MakeBarb();  }
 	if( Button(850+ox,y+=80,"Quit")       ) if(lmd) { done=true; }
 
-	//f_b.Print(screen,message.c_str(), 11+ox,701+oy );
-	//f_w.Print(screen,message.c_str(), 10+ox,700+oy );
+	f_b.Print(screen,"C35", 11+ox,701+oy );
+	f_w.Print(screen,"C35", 10+ox,700+oy );
 }
 
 void C35::LoadScreen::ParseInput(SDL_Event& e)

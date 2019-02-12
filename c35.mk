@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Daniel Nyström
-Date                   :=02/11/19
+Date                   :=02/12/19
 CodeLitePath           :="/home/sp2danny/.codelite"
 LinkerName             :=/usr/bin/clang++ 
 SharedObjectLinkerName :=/usr/bin/clang++ -shared -fPIC
@@ -39,8 +39,8 @@ LinkOptions            :=
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)src $(IncludeSwitch)inc $(IncludeSwitch)/usr/include/SDL $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)SDL 
-ArLibs                 :=  "SDL" 
+Libs                   := $(LibrarySwitch)SDL $(LibrarySwitch)SDL_ttf 
+ArLibs                 :=  "SDL" "SDL_ttf" 
 LibPath                := $(LibraryPathSwitch)/usr/lib/x86_64-linux-gnu 
 
 ##
