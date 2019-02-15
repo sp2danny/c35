@@ -45,3 +45,5 @@ bin
 Debug
 Release
 *.exp
+.codelite
+c35.mk
