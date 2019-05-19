@@ -15,67 +15,65 @@ using namespace std;
 
 namespace C35
 {
-	class LoadScreen : public Frame
-	{
+class LoadScreen : public Frame
+{
 	public:
-		LoadScreen();
-		~LoadScreen();
-		virtual void Update(int);
-		virtual void Display();
-		virtual void ParseInput(SDL_Event&);
-		virtual bool Done();
-		virtual bool Unload();
+	LoadScreen();
+	~LoadScreen();
+	virtual void Update(int);
+	virtual void Display();
+	virtual void ParseInput(SDL_Event&);
+	virtual bool Done();
+	virtual bool Unload();
+
 	private:
+	void RandomMap();
+	void LoadMap();
+	void LoadGame();
 
-		void RandomMap();
-		void LoadMap();
-		void LoadGame();
+	SDL_Surface* bg;
+	bool         done;
 
-		SDL_Surface* bg;
-		bool done;
+	AnimReflection refl_n;
+};
 
-		AnimReflection refl_n;
+}  // namespace C35
 
-	};
-
-}
-
-
-	int mx,my;
-	bool lmd;
-	Font f_w;
-	Font f_b;
-	int ox,oy;
+int  mx, my;
+bool lmd;
+Font f_w;
+Font f_b;
+int  ox, oy;
 
 C35::Frame* GetLoadScreen()
 {
-	static C35::LoadScreen* loadscreen =0;
+	static C35::LoadScreen* loadscreen = 0;
 
-	if(!loadscreen) loadscreen = new C35::LoadScreen();
+	if (!loadscreen)
+		loadscreen = new C35::LoadScreen();
 
 	return loadscreen;
 }
 
 C35::LoadScreen::LoadScreen()
 {
-	bg = SDL_LoadBMP( "gfx/AdvGenBG.bmp" );
+	bg  = SDL_LoadBMP("gfx/AdvGenBG.bmp");
 	lmd = done = false;
-	mx=my=0;
+	mx = my = 0;
 	RawFont rf;
 	rf.LoadFile("gfx/arial.sdlf");
 	SDL_PixelFormat* pf = SDL_GetVideoSurface()->format;
-	rf.Instansiate( f_w, SDL_MapRGB( pf, 255,255,255 ) );
-	rf.Instansiate( f_b, SDL_MapRGB( pf, 0,0,0 ) );
+	rf.Instansiate(f_w, SDL_MapRGB(pf, 255, 255, 255));
+	rf.Instansiate(f_b, SDL_MapRGB(pf, 0, 0, 0));
 
 	AD& night = Asset<AD>("gfx/knight/walk.ad");
 
 	night.Instance(70);
-	refl_n = night.Refl(270,70);
+	refl_n = night.Refl(270, 70);
 	night.FreeData();
 
-	ox = ( screen->w - bg->w ) / 2;
-	oy = ( screen->h - bg->h ) / 2;
-
+	ox = (screen->w - bg->w) / 2;
+	oy = (screen->h - bg->h) / 2;
 }
 
 C35::LoadScreen::~LoadScreen()
@@ -85,51 +83,53 @@ C35::LoadScreen::~LoadScreen()
 
 void C35::LoadScreen::Update(int ms)
 {
-	refl_n.Update( ms );
+	refl_n.Update(ms);
 }
 
 void C35::LoadScreen::RandomMap()
 {
-	//GameEngine::Init();
-	//GameEngine::RandomMap();
-	//Push( GameEngine::GUI() );
+	// GameEngine::Init();
+	// GameEngine::RandomMap();
+	// Push( GameEngine::GUI() );
 }
 
 void C35::LoadScreen::LoadMap()
 {
 	GameEngine::Init();
 	GameEngine::LoadMap("map-01.m35");
-	Push( GameEngine::GUI() );
+	Push(GameEngine::GUI());
 }
 
 void C35::LoadScreen::LoadGame()
 {
-	//GameEngine::Init();
-	//GameEngine::LoadGame("save-01.s35");
-	//Push( GameEngine::GUI() );
+	// GameEngine::Init();
+	// GameEngine::LoadGame("save-01.s35");
+	// Push( GameEngine::GUI() );
 }
 
-int wrap_dist( int a, int b, int sz )
+int wrap_dist(int a, int b, int sz)
 {
-	int m1 = a-b;
-	int m2 = a-b-sz;
-	int m3 = a-b+sz;
+	int m1 = a - b;
+	int m2 = a - b - sz;
+	int m3 = a - b + sz;
 
-	if( abs(m1) < abs(m2) )
+	if (abs(m1) < abs(m2))
 	{
-		if( abs(m1) < abs(m3) )
+		if (abs(m1) < abs(m3))
 			return m1;
 	}
-	if( abs(m2) < abs(m3) )
+	if (abs(m2) < abs(m3))
 		return m2;
 	else
 		return m3;
 }
 
-int wrap( int a, int sz )
+int wrap(int a, int sz)
 {
-	while( a <   0 ) a += sz;
-	while( a >= sz ) a -= sz;
+	while (a < 0)
+		a += sz;
+	while (a >= sz)
+		a -= sz;
 	return a;
 }
 /*
@@ -181,7 +181,7 @@ void HuePress()
 	message = ": " + IntToStr(ha[0]);
 	for(j=1;j<C35::NUM_NIG;++j)
 		message += ", " + IntToStr(ha[j]);
-} 
+}
 
 void MakeBarb()
 {
@@ -198,47 +198,66 @@ void MakeBarb()
 
 void C35::LoadScreen::Display()
 {
-	SDL_Rect r = { ox,oy };
-	SDL_BlitSurface( bg,0,screen,&r);
+	SDL_Rect r = {ox, oy};
+	SDL_BlitSurface(bg, 0, screen, &r);
 
-	refl_n.Overlay(screen,300+ox,500+oy);
+	refl_n.Overlay(screen, 300 + ox, 500 + oy);
 
-	int y = 150+oy;
-	if( Button(850+ox,y+=80,"Random Map") ) if(lmd) { lmd=false; RandomMap(); }
-	if( Button(850+ox,y+=80,"Load Map")   ) if(lmd) { lmd=false; LoadMap();   }
-	if( Button(850+ox,y+=80,"Load Game")  ) if(lmd) { lmd=false; LoadGame();  }
-	//if( Button(850+ox,y+=80,"Make Barb")  ) if(lmd) { lmd=false; MakeBarb();  }
-	if( Button(850+ox,y+=80,"Quit")       ) if(lmd) { done=true; }
+	int y = 150 + oy;
+	if (Button(850 + ox, y += 80, "Random Map"))
+		if (lmd)
+		{
+			lmd = false;
+			RandomMap();
+		}
+	if (Button(850 + ox, y += 80, "Load Map"))
+		if (lmd)
+		{
+			lmd = false;
+			LoadMap();
+		}
+	if (Button(850 + ox, y += 80, "Load Game"))
+		if (lmd)
+		{
+			lmd = false;
+			LoadGame();
+		}
+	// if( Button(850+ox,y+=80,"Make Barb")  ) if(lmd) { lmd=false; MakeBarb();  }
+	if (Button(850 + ox, y += 80, "Quit"))
+		if (lmd)
+		{
+			done = true;
+		}
 
-	f_b.Print(screen,"C35", 11+ox,701+oy );
-	f_w.Print(screen,"C35", 10+ox,700+oy );
+	f_b.Print(screen, "C35", 11 + ox, 701 + oy);
+	f_w.Print(screen, "C35", 10 + ox, 700 + oy);
 }
 
 void C35::LoadScreen::ParseInput(SDL_Event& e)
 {
-	if( e.type == SDL_KEYDOWN )
+	if (e.type == SDL_KEYDOWN)
 	{
-		if( e.key.keysym.sym == SDLK_ESCAPE )
-			done=true;
+		if (e.key.keysym.sym == SDLK_ESCAPE)
+			done = true;
 	}
 
-	if( e.type == SDL_MOUSEBUTTONDOWN )
-		if( e.button.button == SDL_BUTTON_LEFT )
+	if (e.type == SDL_MOUSEBUTTONDOWN)
+		if (e.button.button == SDL_BUTTON_LEFT)
 			lmd = true;
-	if( e.type == SDL_MOUSEBUTTONUP )
-		if( e.button.button == SDL_BUTTON_LEFT )
+	if (e.type == SDL_MOUSEBUTTONUP)
+		if (e.button.button == SDL_BUTTON_LEFT)
 			lmd = false;
 
-	if( e.type == SDL_MOUSEMOTION )
+	if (e.type == SDL_MOUSEMOTION)
 	{
 		mx = e.motion.x;
 		my = e.motion.y;
 	}
 }
 
-bool  C35::LoadScreen::Done()
+bool C35::LoadScreen::Done()
 {
-	return done ;
+	return done;
 }
 
 bool C35::LoadScreen::Unload()
@@ -247,6 +266,3 @@ bool C35::LoadScreen::Unload()
 }
 
 // ----------------------------------------------------------------------------------------------------------
-
-
-

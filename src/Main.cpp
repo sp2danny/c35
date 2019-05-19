@@ -8,12 +8,12 @@
 
 void Main()
 {
-	C35::Frame::Init( "C35" );
-	C35::Frame::Push( GetLoadScreen() );
+	C35::Frame::Init("C35");
+	C35::Frame::Push(GetLoadScreen());
 	C35::Frame::Run();
 }
 
-/* 
+/*
 int _stdcall WinMain(void*,void*,char*,int)
 {
 	Main();
@@ -28,4 +28,3 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	return 0;
 }
 /* */
-
